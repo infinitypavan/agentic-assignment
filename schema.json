@@ -1,0 +1,22 @@
+{
+  "system_architecture": {
+    "name": "Autonomous Research Agent",
+    "pattern": "ReAct (Reasoning + Acting)",
+    "core_components": {
+      "brain": "Google Gemini 1.5 Pro",
+      "framework": "LangChain",
+      "tool_registry": [
+        {
+          "tool_name": "Wikipedia_API",
+          "capability": "Real-time factual data retrieval"
+        }
+      ]
+    },
+    "execution_loop": [
+      "Thought: Evaluate user prompt to determine if external data is needed.",
+      "Action: Call the appropriate tool (Wikipedia) with a formulated query.",
+      "Observation: Ingest the data returned by the tool.",
+      "Resolution: Synthesize the observation into a final, natural language answer."
+    ]
+  }
+}
