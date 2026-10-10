@@ -1,22 +1,37 @@
 {
-  "system_architecture": {
-    "name": "Autonomous Research Agent",
-    "pattern": "ReAct (Reasoning + Acting)",
-    "core_components": {
-      "brain": "Google Gemini 1.5 Pro",
-      "framework": "LangChain",
-      "tool_registry": [
-        {
-          "tool_name": "Wikipedia_API",
-          "capability": "Real-time factual data retrieval"
-        }
-      ]
+  "project_name": "Agentic AI Multi-Tool ReAct Assignment",
+  "architecture": {
+    "framework": "LangChain",
+    "agent_type": "Tool-Calling ReAct (Reasoning and Acting)",
+    "llm_engine": {
+      "provider": "Google",
+      "model": "gemini-3.8-flash",
+      "temperature": 0
     },
-    "execution_loop": [
-      "Thought: Evaluate user prompt to determine if external data is needed.",
-      "Action: Call the appropriate tool (Wikipedia) with a formulated query.",
-      "Observation: Ingest the data returned by the tool.",
-      "Resolution: Synthesize the observation into a final, natural language answer."
+    "tools": [
+      {
+        "name": "Wikipedia",
+        "type": "langchain_community.tools.WikipediaQueryRun",
+        "purpose": "Retrieve factual summaries and historical data from Wikipedia."
+      },
+      {
+        "name": "DuckDuckGo Search",
+        "type": "langchain_community.tools.DuckDuckGoSearchRun",
+        "purpose": "Search the live web for real-time information and statistics."
+      },
+      {
+        "name": "Custom Calculator",
+        "type": "@tool (Python eval)",
+        "purpose": "Safely evaluate mathematical expressions extracted from web data."
+      }
+    ],
+    "execution_flow": [
+      "1. User submits query.",
+      "2. Gemini evaluates if tools are needed or if it can answer directly.",
+      "3. If tools are needed, Gemini returns tool calls.",
+      "4. Agent executes Wikipedia, DuckDuckGo, or Calculator safely (catching errors).",
+      "5. Agent feeds the observation back to Gemini.",
+      "6. Loop repeats until Gemini synthesizes a final text answer."
     ]
   }
 }
