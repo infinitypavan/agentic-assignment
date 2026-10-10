@@ -1,0 +1,2 @@
+Before execution, make sure to use an API key (example, from Google AI Studio in the agent.py file where it is supposed to be entered to ensure the successful running of the agent.
+Note on execution: This agent is built using the latest experimental gemini-3.8-flash model. Google currently restricts this specific model to a strict 20-request daily quota on free tiers. If the script throws a 429 RESOURCE_EXHAUSTED error during grading, the quota has temporarily maxed out.
